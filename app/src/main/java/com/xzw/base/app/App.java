@@ -3,7 +3,6 @@ package com.xzw.base.app;
 import android.app.Application;
 
 import com.xzw.base.base.BaseActivity;
-import com.xzw.base.base.BaseFragmentActivity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,9 +14,8 @@ import java.util.List;
 
 public class App extends Application{
 
-    private App app;
-    private List<BaseActivity> mActivitys = new ArrayList<>();
-    private List<BaseFragmentActivity> mFragmentActivitys = new ArrayList<>();
+    private static App app;
+    private static List<BaseActivity> mActivitys = new ArrayList<>();
 
     @Override
     public void onCreate() {
@@ -25,8 +23,29 @@ public class App extends Application{
         app = this;
     }
 
-    public App getApp(){
+    public void addActivity(BaseActivity activity){
+        if(activity != null){
+            mActivitys.add(activity);
+        }
+    }
+
+    public void removeActivity(BaseActivity activity){
+        if(activity != null && mActivitys.contains(activity)){
+            mActivitys.remove(activity);
+        }
+    }
+
+    public static App getApp(){
         return app;
+    }
+
+    public static void exitApp(){
+        for(BaseActivity activity : mActivitys){
+            activity.finish();
+        }
+        mActivitys.clear();
+        mActivitys = null;
+        app = null;
     }
 
 }
