@@ -8,17 +8,20 @@ import com.xzw.base.app.App;
 
 /**
  * Created by xuzw-pc on 2017/9/7.
+ *
  */
 
-public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppCompatActivity{
+public abstract class BaseActivity<V,P extends BasePresenter<V>> extends AppCompatActivity{
 
-    public T presenter;
+    public P presenter;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         presenter = initPresenter();
-        presenter.attach((V)this);
+        if(presenter != null){
+            presenter.attach((V)this);
+        }
         App.getApp().addActivity(this);
     }
 
@@ -30,9 +33,10 @@ public abstract class BaseActivity<V,T extends BasePresenter<V>> extends AppComp
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        presenter.dettach();
+        if(presenter != null){
+            presenter.dettach();
+        }
         App.getApp().removeActivity(this);
     }
-
-    public abstract T initPresenter();
+    public abstract P initPresenter();
 }
