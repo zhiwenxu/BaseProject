@@ -39,4 +39,6 @@ public abstract class BaseActivity<V,P extends BasePresenter<V>> extends AppComp
         App.getApp().removeActivity(this);
     }
     public abstract P initPresenter();
+//    public abstract void initTitleView();
+
 }
