@@ -8,10 +8,7 @@ public class StringUtil {
 
     //判断 字符串是否为空
     public static boolean isEmpty(String str){
-        if(str == null || str.equals("") || str.equals("null")){
-            return true;
-        }
-        return false;
+        return str == null || str.equals("") || str.equals("null");
     }
 
 }

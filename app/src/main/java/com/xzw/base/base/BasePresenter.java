@@ -8,8 +8,7 @@ package com.xzw.base.base;
  */
 
 public abstract class BasePresenter<T> {
-     public T mView;
-
+    public T mView;
     public void attach(T v){
         mView = v;
     }
